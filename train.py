@@ -118,6 +118,9 @@ def main():
                                    * hvd.size())
     printr(f'\n==> creating optimizer "{configs.train.optimizer}"')
 
+    # todo tdye: 因为下面一段代码报attribute error错误，怀疑是configs文件里没有optimize_bn_separately属性
+    configs.train['optimize_bn_separately'] = True
+
     if configs.train.optimize_bn_separately:
         optimizer = configs.train.optimizer([
             dict(params=get_common_parameters(model)),
